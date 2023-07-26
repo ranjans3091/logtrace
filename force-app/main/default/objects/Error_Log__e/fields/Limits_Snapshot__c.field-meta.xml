@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limits_Snapshot__c</fullName>
+    <description>This field capture the  limit snapshot which represents the Apex profiling</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field capture the  limit snapshot which represents the Apex profiling</inlineHelpText>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Limits Snapshot</label>
+    <length>131072</length>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>
