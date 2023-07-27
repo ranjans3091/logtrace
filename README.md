@@ -1,18 +1,63 @@
-# Salesforce DX Project: Next Steps
+# Problem Statement in Legacy Error Logging 
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
 
-## How Do You Plan to Deploy Your Changes?
+- In trigger context, if we are performing rollback using throw statement from catch block, we won't be able to store the error logs in salesforce, since all the DML will be rolled back.
+```java
+  try {
+    insert new Account();
+  } catch (Exception ee) {
+    logException(ee);
+    throw ee; // error logging DML will also be rolledback 
+  }
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+```
+- Database.rollback does not work for trigger context sobject.
+- It was impossible to see from the “Apex Job Log” if batch jobs are successful or not, since all caught exceptions are reported as “success”.
+- An additional DML operation is needed in the same transaction.
 
-## Configure Your Salesforce DX Project
+## What are the possible options?
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+To resolve the problem stated above, we needed an option to insert the error logging in a separate transaction.
+- ***Future:*** Future jobs queued by a transaction aren’t processed if the transaction rolls back. Hence, if a transaction rollback, future method will not be invoked. 
 
-## Read All About It
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+
+## Error Logging Using Platform Event
+- ***Platform Event:*** Platform Events work on an event bus-driven architecture and provide an asynchronous thread model. Since a platform event trigger runs in a separate transaction from the one that fired it, governor limits are reset, and the event trigger gets its own set of limits. We are setting the publish behaviour of a platform event to "Publish Immediately" so that the event message will get published regardless of whether the synchronous transaction succeeds.
+
+### Workflow for Error Logging using Platform Events
+Error Occurs: When an error occurs in the application code, a catch block or exception handler captures the error details.
+
+- Error Data Preparation: The error data, including the error message, stack trace, component name, user information, timestamp, and any additional context information, is formatted into a log event payload.
+
+- Platform Event Creation: Depending on the type of error (Batch Apex, Flow Execution, or custom error), the appropriate platform event is created.
+
+- Publish Platform Event: The platform event is published to the Platform Event Bus, ensuring it is asynchronously captured for further processing.
+
+- Event Triggers and Subscribers: Event triggers and subscriber classes are set up to listen for the error events. They process and store the error data in custom objects, logs, or external systems for monitoring and analysis.
+### Benefits of Error Logging using Platform Events
+- **Asynchronous Logging:** Error logging using platform events occurs asynchronously, reducing the performance impact on the main application logic.
+
+- **Real-time Monitoring:** Error events are processed in real-time, enabling immediate detection of issues and providing insights into application health.
+
+- **Centralized Error Data:** All error events are stored in the same platform event object, creating a centralized repository for error logs.
+
+- **Scalability:** Platform Events can handle high volumes of error data, allowing for scalable error logging.
+
+- **Customizable Error Data:** Custom platform events allow for flexible error data structures to meet specific logging and analysis requirements.
+
+- **Governor Limits Isolation:** Platform event triggers run in separate transactions, ensuring governor limits are isolated from the main application transactions.
+
+## Types of Platform Event we are using in this logging framework:
+**BatchApexErrorEvent:** This platform event is used to log errors that occur during the execution of Batch Apex jobs. It allows capturing errors related to batch processing and helps in monitoring and debugging batch jobs.To fire a platform event, a batch Apex class declaration must implement the Database.RaisesPlatformEvents interface. Otherwise BatchApexErrorEvent will not be fired on getting an exception. This event can capture LIMIT exception as well . Published Internally by Salesforce when batch exception occurred.
+
+
+**FlowExecutionErrorEvent:**  Notifies subscribers of errors related to screen flow executions. Messages for this platform event aren’t published for autolaunched flows or processes. This object is available in API version 47.0 and later. . This event can capture LIMIT exception as well. Published Internally by Salesforce when flow exception occurred. The subscription for FlowExecutionErrorEvent using Apex Trigger was only supported until v48.0. After v48.0, the subscription for FlowExecutionErrorEvent was supported only by Flow and Processes.
+
+**Custom Platform Events:** Custom platform events can be designed and used for logging specific errors or custom application events. This PE type can be used to log error from Apex Triggers, Controllers, Screen Flow with fault screen.  
+
+# Is There Any Event Delivery Limitation?
+Non-CometD clients, including Apex triggers, processes, and flows, don’t count against the event delivery limit. The number of event messages that an Apex trigger, process, or flow can process depends on how long the processing takes for each subscriber. The longer the processing time, the longer it takes for the subscriber to reach the tip of the event stream.
+
+Reference: [Platform Event Limitation](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_event_limits.htm)
+
