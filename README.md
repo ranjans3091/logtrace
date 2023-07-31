@@ -1,3 +1,7 @@
+![LogTrace](LogTraceLogo.png)
+
+
+
 # Problem Statement in Legacy Error Logging 
 
 
