@@ -1,0 +1,15 @@
+<template>
+    <div class="slds-p-top_large">
+        <div if:true={isLoaded} class="slds-is-relative">
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </div>
+    </div>
+    <lightning-card>
+        <h3 slot="title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">;
+                <use xlink:href={svgURL}></use>
+            </svg>
+            LogTrace Purging
+        </h3>
+    </lightning-card>
+</template>

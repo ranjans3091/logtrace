@@ -59,5 +59,28 @@ Error Occurs: When an error occurs in the application code, a catch block or exc
 # Is There Any Event Delivery Limitation?
 Non-CometD clients, including Apex triggers, processes, and flows, don’t count against the event delivery limit. The number of event messages that an Apex trigger, process, or flow can process depends on how long the processing takes for each subscriber. The longer the processing time, the longer it takes for the subscriber to reach the tip of the event stream.
 
+# Invoke LogTrace from Apex using below code snippet
+``` java
+try
+{
+  //error generated  
+}catch(QueryException qe)
+{
+  GenericErrorLoggerClass.logException(qe, 'AccountTrigger');
+}catch(DMLException de)
+{
+  GenericErrorLoggerClass.logException(de, 'AccountTrigger');
+}catch(Exception ee)
+{
+  GenericErrorLoggerClass.logException(ee, 'AccountTrigger');
+}
+```
+# Invoke LogTrace from Batch Apex by implementing the DataBase.RaisePlatformEvent on a Batch 
+``` java
+public with sharing class SamplePlatformEventBatch implements Database.Batchable<SObject>,Database.RaisesPlatformEvents
+```
+In order to enable error logging for batch class we just need to implement the DataBase.RaisePlatformEvent and LogTrace will take care of the rest
+
+
 Reference: [Platform Event Limitation](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_event_limits.htm)
 
