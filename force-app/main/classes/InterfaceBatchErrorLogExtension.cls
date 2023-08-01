@@ -6,7 +6,7 @@
 *               logging the error information by invoking an external logging extension using LoggerInterface
 * @TestClass:   BatchApexErrorEventTest 
 ***********************************************************************************************/
-public with sharing class InterfaceBatchErrorLogExtension implements LoggerInterface{
+public class InterfaceBatchErrorLogExtension implements LoggerInterface{
     /**
      * @Title: execute
      * @Description:Processes a list of BatchApexErrorEvent records and creates ErrorLog__c records to log batch apex errors and exceptions.

@@ -8,7 +8,7 @@
 * @Implements:  LoggerInterface
 * @TestClass:   BatchApexErrorEventTest 
 ***********************************************************************************************/
-public with sharing class InterfaceFlowErrorLogExtension implements LoggerInterface {
+public class InterfaceFlowErrorLogExtension implements LoggerInterface {
     /**
      * @Title: execute
      * @Description:This method processes a list of FlowExecutionErrorEvent records and logs the flow execution errors in the specified error logging object.

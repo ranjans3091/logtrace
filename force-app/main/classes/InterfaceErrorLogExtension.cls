@@ -6,7 +6,7 @@
 * @Implements:  LoggerInterface
 * @TestClass:   GenericErrorLoggerClassTest 
 ***********************************************************************************************/
-public with sharing class InterfaceErrorLogExtension implements LoggerInterface {
+public class InterfaceErrorLogExtension implements LoggerInterface {
     /**
      * @Title: execute
      * @Description:Converts a list of platform event records of type Error_Log__e into custom object records of type ErrorLog__c and inserts them into the database.

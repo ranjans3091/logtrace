@@ -1,4 +1,3 @@
-@SuppressWarnings("PMD.EmptyCatchBlock")
 @isTest
 private with sharing class BatchApexErrorEventTest {
     static testmethod void testLoadData()

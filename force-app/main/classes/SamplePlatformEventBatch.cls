@@ -3,7 +3,7 @@
 * @Date:        16th July 2023
 * @Description: This class will be used to demonstrate the platform event error logging. Will be used in test classes
 ***********************************************************************************************/
-public with sharing class SamplePlatformEventBatch implements Database.Batchable<SObject>,Database.RaisesPlatformEvents{
+public class SamplePlatformEventBatch implements Database.Batchable<SObject>,Database.RaisesPlatformEvents{
     /**
      * @Title: afterInsert
      * @Description:This method is the starting point of the batch execution. It retrieves a list of Account records

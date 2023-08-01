@@ -51,7 +51,7 @@ public with sharing class FlowExecutionEventHandler {
             }
         }catch(Exception ee)
         {
-            //capture exception
+            
         }
     }
     @TestVisible
