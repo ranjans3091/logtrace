@@ -7,7 +7,7 @@
 *               logging the error information into the organization's error log object or invoking an external logging extension using LoggerInterface
 * @TestClass:   GenericErrorLoggerClassTest 
 ***********************************************************************************************/
-public with sharing class ErrorLogEventTriggerHandler {
+public with sharing class ErrorLogEventTriggerHandler { 
     /**
      * @Title: TRIGGER_METADATA
      * @Description:Constant variable to hold the name of the Custom Metadata Type record used for configuration.

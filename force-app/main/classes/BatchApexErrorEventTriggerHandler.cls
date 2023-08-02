@@ -8,7 +8,7 @@
 * @TestClass:   BatchApexErrorEventTest , SamplePlatformEventBatch(for data setup) 
 ***********************************************************************************************/
 public with sharing class BatchApexErrorEventTriggerHandler {
-    /**
+    /** 
      * @Title: TRIGGER_METADATA
      * @Description:Constant variable to hold the name of the Custom Metadata Type record used for configuration.
     **/

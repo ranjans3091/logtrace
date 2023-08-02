@@ -6,7 +6,7 @@
 *               It provides a mechanism to process and log the error events based on custom metadata settings.
 * @TestClass:   TBD 
 ***********************************************************************************************/
-public with sharing class FlowExecutionEventHandler {
+public with sharing class FlowExecutionEventHandler { 
     /**
      * @Title: TRIGGER_METADATA
      * @Description:Constant variable to hold the name of the Custom Metadata Type record used for configuration.
