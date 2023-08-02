@@ -86,7 +86,7 @@ public with sharing class SamplePlatformEventBatch implements Database.Batchable
 In order to enable error logging for batch class we just need to implement the DataBase.RaisePlatformEvent and LogTrace will take care of the rest
 
 # Enable/Disable the Logging 
-In some case, if we want to avoid logging the error data into salesforce for any reason(Data Storage etc), we can simply uncheck the "Is Logging Needed?" field from all the custom metadata records. 
+In some case, if we want to avoid logging the error data into salesforce for any reason(Data Storage etc), we can simply uncheck the "Is Logging Needed?" field from all the custom metadata records.  
 
 Reference: [Platform Event Limitation](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_event_limits.htm)
 
