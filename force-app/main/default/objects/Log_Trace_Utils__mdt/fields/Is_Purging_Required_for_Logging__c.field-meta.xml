@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Purging_Required_for_Logging__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If checked then Logs will be deleted after declared interval.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>If checked then Logs will be deleted after declared interval.</inlineHelpText>
+    <label>Is Purging Required for Logging?</label>
+    <type>Checkbox</type>
+</CustomField>

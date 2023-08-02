@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Logging_Needed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If this checkbox is true then Logging object will record Error or Integration details.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>If this checkbox is true then Logging object will record Error or Integration details.</inlineHelpText>
+    <label>Is Logging Needed?</label>
+    <type>Checkbox</type>
+</CustomField>

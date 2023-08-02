@@ -35,6 +35,7 @@
         <name>StaticResource</name>
     </types>
     <types>
+        <members>Log_Trace_Utils__mdt-Log Trace Util Layout</members>
         <members>ErrorLog__c-Error Log Layout</members>
         <name>Layout</name>
     </types>
@@ -43,6 +44,7 @@
         <name>customtab</name>
     </types>
     <types>
+        <members>Log_Trace_Utils__mdt</members>
         <members>ErrorLog__c</members>
         <members>Error_Log__e</members>
         <name>CustomObject</name>
@@ -50,6 +52,10 @@
     <types>
         <members>Logging_Permission_Set</members>
         <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
     </types>
     <version>57.0</version>
 </Package>

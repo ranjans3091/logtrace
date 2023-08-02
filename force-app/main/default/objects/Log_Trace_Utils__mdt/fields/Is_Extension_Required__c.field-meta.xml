@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Extension_Required__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If this checkbox is true, then the Override class will be used to process the Platform Event data and store it into a Salesforce object</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>If this checkbox is true, then the Override class will be used to process the Platform Event data and store it into a Salesforce object</inlineHelpText>
+    <label>Is Extension Required?</label>
+    <type>Checkbox</type>
+</CustomField>

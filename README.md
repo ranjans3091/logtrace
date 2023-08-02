@@ -5,7 +5,7 @@
 # Problem Statement in Legacy Error Logging 
 
 
-- In trigger context, if we are performing rollback using throw statement from catch block, we won't be able to store the error logs in salesforce, since all the DML will be rolled back.
+- In trigger context, if we are performing rollback using the throw statement from the catch block, we won't be able to store the error logs in Salesforce since all the DML will be rolled back.
 ```java
   try {
     insert new Account();
@@ -85,6 +85,8 @@ public with sharing class SamplePlatformEventBatch implements Database.Batchable
 ```
 In order to enable error logging for batch class we just need to implement the DataBase.RaisePlatformEvent and LogTrace will take care of the rest
 
+# Enable/Disable the Logging 
+In some case, if we want to avoid logging the error data into salesforce for any reason(Data Storage etc), we can simply uncheck the "Is Logging Needed?" field from all the custom metadata records. 
 
 Reference: [Platform Event Limitation](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_event_limits.htm)
 
