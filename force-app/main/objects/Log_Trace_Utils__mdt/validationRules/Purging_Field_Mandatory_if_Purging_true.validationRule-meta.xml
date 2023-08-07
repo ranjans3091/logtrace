@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purging_Field_Mandatory_if_Purging_true</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(AND(Is_Purging_Required_for_Logging__c,OR(ISBLANK(Log_Purging_Days__c),ISBLANK(Purging_Object__c)) ), true, false)</errorConditionFormula>
+    <errorMessage>When Purging Required is True, Log Purging and Purging Object is mandatory</errorMessage>
+</ValidationRule>

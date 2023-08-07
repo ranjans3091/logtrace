@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-p-top_large">
+        <div if:true={isLoaded} class="slds-is-relative">
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </div>
+    </div>
+    <lightning-card>
+        <h3 slot="title">
+            <img src={svgURL} alt="logTraceIcon" class="customIcon">
+            LogTrace Purging
+        </h3>
+        <lightning-layout multiple-rows >
+            <lightning-layout-item padding="around-medium" size="12">
+                <lightning-combobox name="logType" 
+                            label="Select Log Type:" 
+                            placeholder="Select log Typ.e.g:Error,Integration" 
+                            options={options}
+                            value={selectedValue}
+                            onchange={selectLogType}
+                            class="comboBoxClass slds-align_absolute-center"
+                            ></lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-medium" size="12">
+                <lightning-button class="slds-align_absolute-center" variant="destructive" label="Purge It!!"  onclick={purgeLogRecords}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+       
+        
+    </lightning-card>
+</template>

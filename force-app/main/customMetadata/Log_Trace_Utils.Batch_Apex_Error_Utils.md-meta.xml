@@ -12,7 +12,7 @@
     </values>
     <values>
         <field>Is_Purging_Required_for_Logging__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Log_Purging_Days__c</field>
@@ -24,6 +24,6 @@
     </values>
     <values>
         <field>Purging_Object__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">ErrorLog__c</value>
     </values>
 </CustomMetadata>
